@@ -1,0 +1,49 @@
+﻿<Window x:Class="YggToolsPortable.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YggToolsPortable"
+        mc:Ignorable="d"
+        Title="YggToolsPortable" Height="420" Width="1172">
+    <Grid>
+        <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10">
+            <TabItem Header="Torrent Downloader">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,22,10,10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Width="650" Text="{Binding Title}" />
+                                    <ProgressBar Grid.Column="1" Width="200" Minimum="0" Maximum="100" Value="{Binding Completion}" Name="pbStatus" Margin="0,0,-100,0" />
+                                    <TextBlock Grid.Column="1" Width="113" Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="87,0,-100,0" />
+                                    <TextBlock Width="Auto" Text="50 Mo/s" Margin="233,0,-233,0" Grid.ColumnSpan="1" Grid.Column="1" />
+                                    <TextBlock Width="Auto" Text="50 Mo/s" Margin="333,0,-361,0" Grid.ColumnSpan="1" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Torrent Browser">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <StackPanel Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="17,35,17,331">
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Margin="302,0,465,0" />
+                <TextBlock Text="Progress" Margin="740,0,0,0" Grid.ColumnSpan="2" />
+                <TextBlock Text="Down Speed" Margin="885,0,0,0" Grid.ColumnSpan="2" />
+                <TextBlock Text="Up Speed" Margin="992,0,0,0" Grid.ColumnSpan="2" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

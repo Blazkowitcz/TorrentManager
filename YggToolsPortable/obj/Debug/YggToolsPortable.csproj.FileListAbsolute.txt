@@ -1,0 +1,16 @@
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\bin\Debug\YggToolsPortable.exe.config
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\bin\Debug\YggToolsPortable.exe
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\bin\Debug\YggToolsPortable.pdb
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.csprojResolveAssemblyReference.cache
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\MainWindow.g.cs
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\App.g.cs
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable_MarkupCompile.cache
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable_MarkupCompile.lref
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\MainWindow.baml
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.g.resources
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.Properties.Resources.resources
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.csproj.GenerateResource.Cache
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.csproj.CoreCompileInputs.cache
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.exe
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\obj\Debug\YggToolsPortable.pdb
+c:\users\jacky-marley\source\repos\YggToolsPortable\YggToolsPortable\bin\Debug\MonoTorrent.dll
