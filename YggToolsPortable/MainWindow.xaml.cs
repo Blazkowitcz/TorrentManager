@@ -30,15 +30,14 @@ namespace YggToolsPortable
         BanList banList;
         ClientEngine engine;
         List<TorrentManager> managers = new List<TorrentManager>();
+        List<TorrentInformation> items = new List<TorrentInformation>();
+        TorrentEngineManager engineManager;
         TorrentManager manager;
 
         public MainWindow()
         {
             InitializeComponent();
-            SetupEngine();
-            LoadTorrent();
-            StartTorrents();
-            List<TorrentInformation> items = new List<TorrentInformation>();
+            engineManager = new TorrentEngineManager();
             items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 45 });
             lbTodoList.ItemsSource = items;
 
@@ -47,66 +46,8 @@ namespace YggToolsPortable
             //    Console.WriteLine(manager.Monitor.UploadSpeed);
             //    System.Threading.Thread.Sleep(1000);
             //}
-
         }
 
-        void SetupEngine()
-        {
-            EngineSettings settings = new EngineSettings();
-            settings.AllowedEncryption = ChooseEncryption();
-            settings.PreferEncryption = true;
-            settings.SavePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Torrents");
-            Console.WriteLine(settings.SavePath);
-            settings.GlobalMaxUploadSpeed = 200 * 1024;
-            engine = new ClientEngine(settings);
-            engine.ChangeListenEndpoint(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6969));
-        }
-
-        EncryptionTypes ChooseEncryption()
-        {
-            EncryptionTypes encryption;
-            // This completely disables connections - encrypted connections are not allowed
-            // and unencrypted connections are not allowed
-            encryption = EncryptionTypes.None;
-
-            // Only unencrypted connections are allowed
-            encryption = EncryptionTypes.PlainText;
-
-            // Allow only encrypted connections
-            encryption = EncryptionTypes.RC4Full | EncryptionTypes.RC4Header;
-
-            // Allow unencrypted and encrypted connections
-            encryption = EncryptionTypes.All;
-            encryption = EncryptionTypes.PlainText | EncryptionTypes.RC4Full | EncryptionTypes.RC4Header;
-
-            return encryption;
-        }
-
-        void LoadTorrent()
-        {
-            Torrent torrent = Torrent.Load("C:\\Users\\Jacky-Marley\\Downloads\\American.torrent");
-            foreach (TorrentFile file in torrent.Files)
-            {
-                file.Priority = Priority.DoNotDownload;
-            }
-            torrent.Files[0].Priority = Priority.Highest;
-            try
-            {
-                torrent.Files[1].Priority = Priority.Normal;
-            }
-            catch { }
-            manager = new TorrentManager(torrent, "DownloadFolder", new TorrentSettings());
-            managers.Add(manager);
-            engine.Register(manager);
-            PiecePicker picker = new StandardPicker();
-            picker = new PriorityPicker(picker);
-            manager.ChangePicker(picker);
-        }
-
-        void StartTorrents()
-        {
-            engine.StartAll();
-        }
     }
 
 
