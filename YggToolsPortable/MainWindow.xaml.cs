@@ -19,6 +19,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using YggToolsPortable.Classes;
+using Microsoft.Win32;
 
 namespace YggToolsPortable
 {
@@ -38,7 +39,7 @@ namespace YggToolsPortable
         {
             InitializeComponent();
             engineManager = new TorrentEngineManager();
-            items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 45 });
+            //items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 0, DownSpeed =  "kb/s", UpSpeed = "kb/s"});
             lbTodoList.ItemsSource = items;
 
             //while (manager.State != TorrentState.Stopped && manager.State != TorrentState.Paused)
@@ -48,6 +49,39 @@ namespace YggToolsPortable
             //}
         }
 
+        private void btn_addTorrent_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Torrent (.torrent)|*.torrent|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+            bool? userClickedOK = openFileDialog1.ShowDialog();
+            if (userClickedOK == true)
+            {
+                foreach (string file in openFileDialog1.FileNames)
+                {
+                    Console.WriteLine(file);
+                    engineManager.AddTorrent(file);
+                }
+                UpdateList();
+            }
+
+            while (engineManager.manager.State != TorrentState.Stopped && engineManager.manager.State != TorrentState.Paused)
+            {
+                Console.WriteLine(engineManager.manager.Monitor.DownloadSpeed);
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        void UpdateList()
+        {
+            items.Clear();
+            foreach (TorrentManager torrent in engineManager.managers)
+            {
+                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = "kb/s", UpSpeed = "kb/s" });
+            }
+            lbTodoList.ItemsSource = items;
+        }
     }
 
 

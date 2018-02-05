@@ -13,8 +13,8 @@ namespace YggToolsPortable.Classes
     class TorrentEngineManager
     {
         ClientEngine engine;
-        List<TorrentManager> managers = new List<TorrentManager>();
-        TorrentManager manager;
+        public List<TorrentManager> managers = new List<TorrentManager>();
+        public TorrentManager manager;
 
         public TorrentEngineManager()
         {
@@ -59,25 +59,22 @@ namespace YggToolsPortable.Classes
             Torrent torrent = Torrent.Load(path);
             foreach (TorrentFile file in torrent.Files)
             {
-                file.Priority = Priority.DoNotDownload;
+                file.Priority = Priority.Normal;
             }
             torrent.Files[0].Priority = Priority.Highest;
-            try
-            {
-                torrent.Files[1].Priority = Priority.Normal;
-            }
-            catch { }
             manager = new TorrentManager(torrent, "DownloadFolder", new TorrentSettings());
             managers.Add(manager);
             engine.Register(manager);
             PiecePicker picker = new StandardPicker();
             picker = new PriorityPicker(picker);
             manager.ChangePicker(picker);
+            engine.StartAll();
         }
 
-        void StartTorrents()
+        public void StartTorrents()
         {
             engine.StartAll();
+            
         }
 
         public ClientEngine getEngine()

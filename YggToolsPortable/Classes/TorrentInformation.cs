@@ -9,8 +9,8 @@ namespace YggToolsPortable.Classes
     class TorrentInformation
     {
         public string Title { get; set; }
-        public int Completion { get; set; }
-        public int DownSpeed { get; set; }
-        public int UpSpeed { get; set; }
+        public double Completion { get; set; }
+        public String DownSpeed { get; set; }
+        public String UpSpeed { get; set; }
     }
 }
