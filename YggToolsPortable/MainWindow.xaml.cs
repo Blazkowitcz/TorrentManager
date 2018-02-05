@@ -38,7 +38,8 @@ namespace YggToolsPortable
         public MainWindow()
         {
             InitializeComponent();
-            engineManager = new TorrentEngineManager();
+            Task engineTask = Task.Run(() => { engineManager = new TorrentEngineManager(); });
+            
             //items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 0, DownSpeed =  "kb/s", UpSpeed = "kb/s"});
             lbTodoList.ItemsSource = items;
 
@@ -82,6 +83,7 @@ namespace YggToolsPortable
             }
             lbTodoList.ItemsSource = items;
         }
+
     }
 
 

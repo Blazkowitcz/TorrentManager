@@ -74,7 +74,6 @@ namespace YggToolsPortable.Classes
         public void StartTorrents()
         {
             engine.StartAll();
-            
         }
 
         public ClientEngine getEngine()
