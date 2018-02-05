@@ -38,7 +38,7 @@ namespace YggToolsPortable
         public MainWindow()
         {
             InitializeComponent();
-            Task engineTask = Task.Run(() => { engineManager = new TorrentEngineManager(); });
+            engineManager = new TorrentEngineManager();
             
             //items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 0, DownSpeed =  "kb/s", UpSpeed = "kb/s"});
             lbTodoList.ItemsSource = items;
@@ -64,14 +64,10 @@ namespace YggToolsPortable
                     Console.WriteLine(file);
                     engineManager.AddTorrent(file);
                 }
-                UpdateList();
+                
             }
-
-            while (engineManager.manager.State != TorrentState.Stopped && engineManager.manager.State != TorrentState.Paused)
-            {
-                Console.WriteLine(engineManager.manager.Monitor.DownloadSpeed);
-                System.Threading.Thread.Sleep(1000);
-            }
+            Task engineTask = Task.Run(() => { UpdateEngine(); });
+            UpdateList();
         }
 
         void UpdateList()
@@ -82,6 +78,15 @@ namespace YggToolsPortable
                 items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = "kb/s", UpSpeed = "kb/s" });
             }
             lbTodoList.ItemsSource = items;
+        }
+
+        void UpdateEngine()
+        {
+            while (engineManager.manager.State != TorrentState.Stopped && engineManager.manager.State != TorrentState.Paused)
+            {
+                Console.WriteLine(engineManager.manager.Monitor.DownloadSpeed);
+                Thread.Sleep(1000);
+            }
         }
 
     }

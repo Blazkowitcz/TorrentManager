@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="YggToolsPortable" Height="429.247" Width="1172">
     <Grid>
-        
+
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
             <TabItem Header="Torrent Downloader">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,22,10,38">
+                    <ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,27,10,38">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,2">
@@ -24,11 +24,16 @@
                                     <TextBlock Grid.Column="1" Width="113" Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="87,0,-100,0" />
                                     <TextBlock Width="Auto" Text="{Binding DownSpeed}" Margin="233,0,-233,0" Grid.ColumnSpan="1" Grid.Column="1" />
                                     <TextBlock Width="Auto" Text="{Binding UpSpeed}" Margin="333,0,-361,0" Grid.ColumnSpan="1" Grid.Column="1" />
+
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
+                    <TextBlock Text="Name" Margin="302,0,465,303" />
+                    <TextBlock Text="Progress" Margin="740,0,0,303" />
+                    <TextBlock Text="Down Speed" Margin="885,0,0,303" />
+                    <TextBlock Text="Up Speed" Margin="992,0,0,303" />
                 </Grid>
             </TabItem>
             <TabItem Header="Torrent Browser">
@@ -41,10 +46,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" Margin="302,0,465,0" />
-                <TextBlock Text="Progress" Margin="740,0,0,0" Grid.ColumnSpan="2" />
-                <TextBlock Text="Down Speed" Margin="885,0,0,0" Grid.ColumnSpan="2" />
-                <TextBlock Text="Up Speed" Margin="992,0,0,0" Grid.ColumnSpan="2" />
+
             </Grid>
         </StackPanel>
 
