@@ -20,6 +20,7 @@ using System.Net;
 using System.Threading;
 using YggToolsPortable.Classes;
 using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace YggToolsPortable
 {
@@ -40,15 +41,7 @@ namespace YggToolsPortable
         {
             InitializeComponent();
             engineManager = new TorrentEngineManager();
-            
-            //items.Add(new TorrentInformation() { Title = "Complete this WPF tutorial", Completion = 0, DownSpeed =  "kb/s", UpSpeed = "kb/s"});
             lbTodoList.ItemsSource = items;
-
-            //while (manager.State != TorrentState.Stopped && manager.State != TorrentState.Paused)
-            //{
-            //    Console.WriteLine(manager.Monitor.UploadSpeed);
-            //    System.Threading.Thread.Sleep(1000);
-            //}
         }
 
         private void btn_addTorrent_Click(object sender, RoutedEventArgs e)
@@ -65,12 +58,12 @@ namespace YggToolsPortable
                     Console.WriteLine(file);
                     engineManager.AddTorrent(file);
                 }
-                
+
             }
             UpdateList();
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(timer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
         }
 
@@ -82,13 +75,14 @@ namespace YggToolsPortable
 
         void UpdateList()
         {
-                items.Clear();
-                foreach (TorrentManager torrent in engineManager.managers)
-                {
+            items.Clear();
+            foreach (TorrentManager torrent in engineManager.managers)
+            {
                 Console.WriteLine(i);
-                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = i + " kb/s", UpSpeed = "kb/s" });
-                }
-                lbTodoList.ItemsSource = items;
+                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
+            }
+            lbTodoList.ItemsSource = items;
+            lbTodoList.Items.Refresh();
         }
 
     }
