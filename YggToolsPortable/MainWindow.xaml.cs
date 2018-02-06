@@ -34,6 +34,7 @@ namespace YggToolsPortable
         List<TorrentInformation> items = new List<TorrentInformation>();
         TorrentEngineManager engineManager;
         TorrentManager manager;
+        int i = 0;
 
         public MainWindow()
         {
@@ -66,27 +67,28 @@ namespace YggToolsPortable
                 }
                 
             }
-            Task engineTask = Task.Run(() => { UpdateEngine(); });
+            UpdateList();
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(timer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Start();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            i++;
             UpdateList();
         }
 
         void UpdateList()
         {
-            items.Clear();
-            foreach (TorrentManager torrent in engineManager.managers)
-            {
-                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = "kb/s", UpSpeed = "kb/s" });
-            }
-            lbTodoList.ItemsSource = items;
-        }
-
-        void UpdateEngine()
-        {
-            while (engineManager.manager.State != TorrentState.Stopped && engineManager.manager.State != TorrentState.Paused)
-            {
-                Console.WriteLine(engineManager.manager.Monitor.DownloadSpeed);
-                Thread.Sleep(1000);
-            }
+                items.Clear();
+                foreach (TorrentManager torrent in engineManager.managers)
+                {
+                Console.WriteLine(i);
+                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = i + " kb/s", UpSpeed = "kb/s" });
+                }
+                lbTodoList.ItemsSource = items;
         }
 
     }
