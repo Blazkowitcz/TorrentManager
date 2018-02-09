@@ -37,7 +37,39 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Torrent Browser">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Employee Name"  Binding="{Binding EmployeeName}" Width="120"/>
+                            <DataGridTemplateColumn Header="Orders Count" Width="380">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <ProgressBar Grid.Row="0" Grid.Column="0"  Minimum="0" Maximum="200" Value="{Binding OrderCounts,Mode=OneWay}" ToolTip="{Binding OrderCounts,Mode=OneWay}">
+                                            </ProgressBar>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OrderCounts,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="User Information">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="label" Content="Nickname : " HorizontalAlignment="Left" Margin="151,50,0,0" VerticalAlignment="Top" Width="76"/>
+                    <TextBox x:Name="txt_nick" HorizontalAlignment="Left" Height="23" Margin="232,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
+                    <Button x:Name="button" Content="Update Information" HorizontalAlignment="Left" Margin="584,54,0,0" VerticalAlignment="Top" Width="123" Height="23"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="232,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="232,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="232,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="232,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
+                    <Label x:Name="label_Copy" Content="Download : " HorizontalAlignment="Left" Margin="151,94,0,0" VerticalAlignment="Top" Width="76"/>
+                    <Label x:Name="label_Copy1" Content="Upload : " HorizontalAlignment="Left" Margin="167,137,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Label x:Name="label_Copy2" Content="Ratio : " HorizontalAlignment="Left" Margin="178,178,0,0" VerticalAlignment="Top" Width="49"/>
+                    <Label x:Name="label_Copy3" Content="Save Path : " HorizontalAlignment="Left" Margin="156,219,0,0" VerticalAlignment="Top" Width="71"/>
+                </Grid>
             </TabItem>
         </TabControl>
         <StackPanel Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="17,35,17,331">

@@ -3,6 +3,7 @@ using MonoTorrent.Client.Encryption;
 using MonoTorrent.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,9 +16,11 @@ namespace YggToolsPortable.Classes
         ClientEngine engine;
         public List<TorrentManager> managers = new List<TorrentManager>();
         public TorrentManager manager;
+        MainWindow mainWindow;
 
-        public TorrentEngineManager()
+        public TorrentEngineManager(MainWindow mainWindow)
         {
+            this.mainWindow = mainWindow;
             SetupEngine();
             StartTorrents();
         }
@@ -37,24 +40,27 @@ namespace YggToolsPortable.Classes
         EncryptionTypes ChooseEncryption()
         {
             EncryptionTypes encryption;
-            // This completely disables connections - encrypted connections are not allowed
-            // and unencrypted connections are not allowed
             encryption = EncryptionTypes.None;
-
-            // Only unencrypted connections are allowed
             encryption = EncryptionTypes.PlainText;
-
-            // Allow only encrypted connections
             encryption = EncryptionTypes.RC4Full | EncryptionTypes.RC4Header;
-
-            // Allow unencrypted and encrypted connections
             encryption = EncryptionTypes.All;
             encryption = EncryptionTypes.PlainText | EncryptionTypes.RC4Full | EncryptionTypes.RC4Header;
 
             return encryption;
         }
 
-        public void AddTorrent(String path)
+        public void AutoStartTorrent()
+        {
+            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\");
+            foreach (var file in directory.GetFiles("*.torrent"))
+            {
+                //Console.WriteLine(file.FullName);
+                LaunchTorrent(file.FullName);
+            }
+            mainWindow.UpdateList();
+        }
+
+        void LaunchTorrent(string path)
         {
             Torrent torrent = Torrent.Load(path);
             foreach (TorrentFile file in torrent.Files)
@@ -69,6 +75,13 @@ namespace YggToolsPortable.Classes
             picker = new PriorityPicker(picker);
             manager.ChangePicker(picker);
             engine.StartAll();
+        }
+
+        public void AddTorrent(String path)
+        {
+            LaunchTorrent(path);
+            string fileName = Path.GetFileName(path);
+            File.Copy(path, AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\" + fileName, true);
         }
 
         public void StartTorrents()

@@ -35,12 +35,14 @@ namespace YggToolsPortable
         List<TorrentInformation> items = new List<TorrentInformation>();
         TorrentEngineManager engineManager;
         TorrentManager manager;
-        int i = 0;
+        ManageInformations manageInformations;
 
         public MainWindow()
         {
             InitializeComponent();
-            engineManager = new TorrentEngineManager();
+            engineManager = new TorrentEngineManager(this);
+            manageInformations = new ManageInformations(this);
+            engineManager.AutoStartTorrent();
             lbTodoList.ItemsSource = items;
         }
 
@@ -69,22 +71,19 @@ namespace YggToolsPortable
 
         void timer_Tick(object sender, EventArgs e)
         {
-            i++;
             UpdateList();
         }
 
-        void UpdateList()
+        public void UpdateList()
         {
             items.Clear();
             foreach (TorrentManager torrent in engineManager.managers)
             {
-                Console.WriteLine(i);
                 items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
             }
             lbTodoList.ItemsSource = items;
             lbTodoList.Items.Refresh();
         }
-
     }
 
 
