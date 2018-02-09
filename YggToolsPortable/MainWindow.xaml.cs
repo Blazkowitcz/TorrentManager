@@ -84,6 +84,11 @@ namespace YggToolsPortable
             lbTodoList.ItemsSource = items;
             lbTodoList.Items.Refresh();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 

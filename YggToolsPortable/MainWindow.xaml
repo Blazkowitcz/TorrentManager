@@ -7,19 +7,26 @@
         mc:Ignorable="d"
         Title="YggToolsPortable" Height="429.247" Width="1172">
     <Grid>
-
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
             <TabItem Header="Torrent Downloader">
                 <Grid Background="#FFE5E5E5">
+
                     <ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,27,10,38">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="0,2">
+                                <Grid Margin="0,2" >
+                                    <Grid.Resources>
+                                        <ContextMenu x:Key="ContextMenu">
+                                            <MenuItem Header="Start/Resume" Click="MenuItem_Click"></MenuItem>
+                                            <MenuItem Header="Pause"></MenuItem>
+                                            <MenuItem Header="Delete"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.Resources>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="100" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Width="650" Text="{Binding Title}" />
+                                    <TextBlock Width="650" Text="{Binding Title}" ContextMenu="{DynamicResource ResourceKey=ContextMenu}"/>
                                     <ProgressBar Grid.Column="1" Width="200" Minimum="0" Maximum="100" Value="{Binding Completion}" Name="pbStatus" Margin="0,0,-100,0" />
                                     <TextBlock Grid.Column="1" Width="113" Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="87,0,-100,0" />
                                     <TextBlock Width="Auto" Text="{Binding DownSpeed}" Margin="233,0,-233,0" Grid.ColumnSpan="1" Grid.Column="1" />
@@ -81,6 +88,6 @@
 
             </Grid>
         </StackPanel>
-
+    
     </Grid>
 </Window>
