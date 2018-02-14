@@ -21,6 +21,7 @@ using System.Threading;
 using YggToolsPortable.Classes;
 using Microsoft.Win32;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace YggToolsPortable
 {
@@ -33,6 +34,7 @@ namespace YggToolsPortable
         ClientEngine engine;
         List<TorrentManager> managers = new List<TorrentManager>();
         List<TorrentInformation> items = new List<TorrentInformation>();
+
         TorrentEngineManager engineManager;
         TorrentManager manager;
         ManageInformations manageInformations;
@@ -43,7 +45,9 @@ namespace YggToolsPortable
             engineManager = new TorrentEngineManager(this);
             manageInformations = new ManageInformations(this);
             engineManager.AutoStartTorrent();
-            lbTodoList.ItemsSource = items;
+            
+            DgOrderCount.ItemsSource = items;
+            //lbTodoList.ItemsSource = items;
         }
 
         private void btn_addTorrent_Click(object sender, RoutedEventArgs e)
@@ -63,9 +67,14 @@ namespace YggToolsPortable
 
             }
             UpdateList();
+            StartTimer();
+        }
+
+        public void StartTimer()
+        {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(timer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Start();
         }
 
@@ -81,8 +90,9 @@ namespace YggToolsPortable
             {
                 items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
             }
-            lbTodoList.ItemsSource = items;
-            lbTodoList.Items.Refresh();
+            DgOrderCount.Items.Refresh();
+            //lbTodoList.ItemsSource = items;
+            //lbTodoList.Items.Refresh();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

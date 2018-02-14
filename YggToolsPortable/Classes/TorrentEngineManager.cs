@@ -58,6 +58,7 @@ namespace YggToolsPortable.Classes
                 LaunchTorrent(file.FullName);
             }
             mainWindow.UpdateList();
+            mainWindow.StartTimer();
         }
 
         void LaunchTorrent(string path)

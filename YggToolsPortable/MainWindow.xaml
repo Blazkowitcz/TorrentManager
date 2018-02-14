@@ -10,8 +10,25 @@
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
             <TabItem Header="Torrent Downloader">
                 <Grid Background="#FFE5E5E5">
-
-                    <ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,27,10,38">
+                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" Margin="0,0,0,35" GridLinesVisibility="Vertical" CanUserSortColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"  Binding="{Binding Title}" Width="AUTO"/>
+                            <DataGridTemplateColumn Header="Progress" Width="380">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <ProgressBar Grid.Row="0" Grid.Column="0"  Minimum="0" Maximum="100" Value="{Binding Completion,Mode=OneWay}" ToolTip="{Binding OrderCounts,Mode=OneWay}">
+                                            </ProgressBar>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Completion,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Down Speed"  Binding="{Binding DownSpeed}" Width="AUTO"/>
+                            <DataGridTextColumn Header="Up Speed"  Binding="{Binding UpSpeed}" Width="AUTO"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,27,10,38">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,2" >
@@ -35,32 +52,16 @@
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>
+                    </ListBox>-->
                     <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
-                    <TextBlock Text="Name" Margin="302,0,465,303" />
+                    <!--<TextBlock Text="Name" Margin="302,0,465,303" />
                     <TextBlock Text="Progress" Margin="740,0,0,303" />
                     <TextBlock Text="Down Speed" Margin="885,0,0,303" />
-                    <TextBlock Text="Up Speed" Margin="992,0,0,303" />
+                    <TextBlock Text="Up Speed" Margin="992,0,0,303" />-->
                 </Grid>
             </TabItem>
             <TabItem Header="Torrent Browser">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Employee Name"  Binding="{Binding EmployeeName}" Width="120"/>
-                            <DataGridTemplateColumn Header="Orders Count" Width="380">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <ProgressBar Grid.Row="0" Grid.Column="0"  Minimum="0" Maximum="200" Value="{Binding OrderCounts,Mode=OneWay}" ToolTip="{Binding OrderCounts,Mode=OneWay}">
-                                            </ProgressBar>
-                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OrderCounts,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="User Information">
