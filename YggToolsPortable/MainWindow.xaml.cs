@@ -88,7 +88,7 @@ namespace YggToolsPortable
             items.Clear();
             foreach (TorrentManager torrent in engineManager.managers)
             {
-                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = torrent.Progress, DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
+                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)) , DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
             }
             DgOrderCount.Items.Refresh();
             //lbTodoList.ItemsSource = items;
