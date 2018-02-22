@@ -30,8 +30,6 @@ namespace YggToolsPortable
     /// </summary>
     public partial class MainWindow : Window
     {
-        BanList banList;
-        ClientEngine engine;
         List<TorrentManager> managers = new List<TorrentManager>();
         List<TorrentInformation> items = new List<TorrentInformation>();
 
@@ -97,6 +95,34 @@ namespace YggToolsPortable
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void DgOrderCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DgOrderCount.SelectedItem != null)
+            {
+                DataGrid dataGrid = DgOrderCount;
+                DataGridRow Row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
+                DataGridCell RowAndColumn = (DataGridCell)dataGrid.Columns[0].GetCellContent(Row).Parent;
+                Console.WriteLine(managers.Count);
+                string CellValue = ((TextBlock)RowAndColumn.Content).Text;
+                foreach (TorrentManager torrent in engineManager.managers)
+                {
+                    Console.WriteLine(torrent.Torrent.Name);
+                    if(torrent.Torrent.Name == CellValue)
+                    {
+                        Console.WriteLine("toto");
+                        lbl_name.Content = "Name : " + torrent.Torrent.Name;
+                        lbl_size.Content = "Size : " + torrent.Torrent.Size;
+                        lbl_download.Content = "Download : " + torrent.Monitor.DownloadSpeed;
+                        lbl_upload.Content = "Upload : " + torrent.Monitor.UploadSpeed;
+                        lbl_peers.Content = "Seeder : " + torrent.Peers.Seeds;
+                        lbl_passkey.Content = "Passkey : " + torrent.Torrent.PublisherUrl;
+                    }
+                }
+
+            }
 
         }
     }

@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YggToolsPortable"
         mc:Ignorable="d"
-        Title="YggToolsPortable" Height="429.247" Width="1172">
+        Title="YggToolsPortable" Height="621.247" Width="1172">
     <Grid>
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
             <TabItem Header="Torrent Downloader">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" Margin="0,0,0,35" GridLinesVisibility="Vertical" CanUserSortColumns="False">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,-1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" Margin="0,0,0,252" GridLinesVisibility="Vertical" CanUserSortColumns="False" Grid.ColumnSpan="2" SelectionChanged="DgOrderCount_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"  Binding="{Binding Title}" Width="AUTO"/>
                             <DataGridTemplateColumn Header="Progress" Width="380">
@@ -28,36 +32,18 @@
                             <DataGridTextColumn Header="Up Speed"  Binding="{Binding UpSpeed}" Width="AUTO"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <!--<ListBox Height="AUTO" Name="lbTodoList" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,27,10,38">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,2" >
-                                    <Grid.Resources>
-                                        <ContextMenu x:Key="ContextMenu">
-                                            <MenuItem Header="Start/Resume" Click="MenuItem_Click"></MenuItem>
-                                            <MenuItem Header="Pause"></MenuItem>
-                                            <MenuItem Header="Delete"></MenuItem>
-                                        </ContextMenu>
-                                    </Grid.Resources>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="100" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Width="650" Text="{Binding Title}" ContextMenu="{DynamicResource ResourceKey=ContextMenu}"/>
-                                    <ProgressBar Grid.Column="1" Width="200" Minimum="0" Maximum="100" Value="{Binding Completion}" Name="pbStatus" Margin="0,0,-100,0" />
-                                    <TextBlock Grid.Column="1" Width="113" Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="87,0,-100,0" />
-                                    <TextBlock Width="Auto" Text="{Binding DownSpeed}" Margin="233,0,-233,0" Grid.ColumnSpan="1" Grid.Column="1" />
-                                    <TextBlock Width="Auto" Text="{Binding UpSpeed}" Margin="333,0,-361,0" Grid.ColumnSpan="1" Grid.Column="1" />
-
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>-->
                     <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
-                    <!--<TextBlock Text="Name" Margin="302,0,465,303" />
-                    <TextBlock Text="Progress" Margin="740,0,0,303" />
-                    <TextBlock Text="Down Speed" Margin="885,0,0,303" />
-                    <TextBlock Text="Up Speed" Margin="992,0,0,303" />-->
+                    <GroupBox Header="Torrent Information" Height="212" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="AUTO" Margin="0,0,0,35">
+                        <StackPanel>
+                            <Label Name="lbl_name" Content="Name :"></Label>
+                            <Label Name="lbl_size" Content="Size :" ></Label>
+                            <Label Name="lbl_download" Content="Download :"></Label>
+                            <Label Name="lbl_upload" Content="Upload :"></Label>
+                            <Label Name="lbl_peers" Content="Peers :"></Label>
+                            <Label Name="lbl_passkey" Content="Passkey :"></Label>
+                            <Label Name="lbl_tracker" Content="Tracker :"></Label>
+                        </StackPanel>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Torrent Browser">
@@ -79,6 +65,7 @@
                     <Label x:Name="label_Copy3" Content="Save Path : " HorizontalAlignment="Left" Margin="156,219,0,0" VerticalAlignment="Top" Width="71"/>
                 </Grid>
             </TabItem>
+
         </TabControl>
         <StackPanel Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="17,35,17,331">
             <Grid Margin="0,2">
@@ -89,6 +76,6 @@
 
             </Grid>
         </StackPanel>
-    
+
     </Grid>
 </Window>

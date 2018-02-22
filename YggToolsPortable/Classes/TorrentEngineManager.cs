@@ -30,7 +30,7 @@ namespace YggToolsPortable.Classes
             EngineSettings settings = new EngineSettings();
             settings.AllowedEncryption = ChooseEncryption();
             settings.PreferEncryption = true;
-            settings.SavePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Torrents");
+            settings.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Torrents");
             Console.WriteLine(settings.SavePath);
             settings.GlobalMaxUploadSpeed = 200 * 1024;
             engine = new ClientEngine(settings);
@@ -98,6 +98,11 @@ namespace YggToolsPortable.Classes
         public TorrentManager getTorrentManager()
         {
             return manager;
+        }
+
+        public void UpdateInformations(TorrentManager torrent)
+        {
+
         }
 
 
