@@ -65,6 +65,21 @@
                     <Label x:Name="label_Copy3" Content="Save Path : " HorizontalAlignment="Left" Margin="156,219,0,0" VerticalAlignment="Top" Width="71"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Create Torrent">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Torrent Information" Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="0,0,0,10">
+                        <StackPanel>
+                            <Label Name="aa" Content="Name :"></Label>
+                            <Label Name="zz" Content="Size :" ></Label>
+                            <Label Name="ee" Content="Download :"></Label>
+                            <Label Name="rr" Content="Upload :"></Label>
+                            <Label Name="tt" Content="Peers :"></Label>
+                            <Label Name="yy" Content="Passkey :"></Label>
+                            <Label Name="uu" Content="Tracker :"></Label>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
 
         </TabControl>
         <StackPanel Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="17,35,17,331">
