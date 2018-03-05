@@ -67,17 +67,16 @@
             </TabItem>
             <TabItem Header="Create Torrent">
                 <Grid Background="#FFE5E5E5">
-                    <GroupBox Header="Torrent Information" Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="0,0,0,10">
-                        <StackPanel>
-                            <Label Name="aa" Content="Name :"></Label>
-                            <Label Name="zz" Content="Size :" ></Label>
-                            <Label Name="ee" Content="Download :"></Label>
-                            <Label Name="rr" Content="Upload :"></Label>
-                            <Label Name="tt" Content="Peers :"></Label>
-                            <Label Name="yy" Content="Passkey :"></Label>
-                            <Label Name="uu" Content="Tracker :"></Label>
-                        </StackPanel>
-                    </GroupBox>
+                    <TextBox x:Name="textBox1" HorizontalAlignment="Stretch" Height="21" Margin="10,28,10,0" TextWrapping="Wrap" Text="" IsEnabled="False" VerticalAlignment="Top" Width="AUTO"/>
+                    <Label x:Name="label1" Content="File : " HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="1118"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open File"></Button>
+                        <Button Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open Folder"></Button>
+                    </StackPanel>
+                    <TextBox x:Name="txt_tracker" HorizontalAlignment="Stretch" Height="22" Margin="10,140,10,0" TextWrapping="Wrap" Text="" IsEnabled="true" VerticalAlignment="Top" Width="AUTO"/>
+                    <Label x:Name="lbl_tracker_create" Content="Tracker : " HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="1118"/>
+                    <Label x:Name="lbl_site_create" Content="Site : " HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" Width="1118"/>
+                    <TextBox x:Name="txt_site" HorizontalAlignment="Stretch" Height="22" Margin="10,215,10,0" TextWrapping="Wrap" Text="" IsEnabled="true" VerticalAlignment="Top" Width="AUTO"/>
                 </Grid>
             </TabItem>
 
