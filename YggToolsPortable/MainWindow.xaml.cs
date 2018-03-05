@@ -36,12 +36,14 @@ namespace YggToolsPortable
         TorrentEngineManager engineManager;
         TorrentManager manager;
         ManageInformations manageInformations;
+        CreateTorrent createTorrent;
 
         public MainWindow()
         {
             InitializeComponent();
             engineManager = new TorrentEngineManager(this);
             manageInformations = new ManageInformations(this);
+            createTorrent = new CreateTorrent(this);
             engineManager.AutoStartTorrent();
             
             DgOrderCount.ItemsSource = items;
@@ -124,6 +126,16 @@ namespace YggToolsPortable
 
             }
 
+        }
+
+        private void btn_OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            createTorrent.OpenFile();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            createTorrent.OpenFolder();
         }
     }
 

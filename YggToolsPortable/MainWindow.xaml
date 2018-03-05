@@ -67,21 +67,22 @@
             </TabItem>
             <TabItem Header="Create Torrent">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="textBox1" HorizontalAlignment="Stretch" Height="21" Margin="10,28,10,0" TextWrapping="Wrap" Text="" IsEnabled="False" VerticalAlignment="Top" Width="AUTO"/>
+                    <TextBox x:Name="lbl_fileName" HorizontalAlignment="Stretch" Height="21" Margin="10,28,10,0" TextWrapping="Wrap" Text="" IsEnabled="False" VerticalAlignment="Top" Width="AUTO"/>
                     <Label x:Name="label1" Content="File : " HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="1118"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open File"></Button>
-                        <Button Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open Folder"></Button>
+                        <Button Name="btn_OpenFolder" Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open File" Click="btn_OpenFile_Click"></Button>
+                        <Button Width="125" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,54,0,0" Content="Open Folder" Click="Button_Click"></Button>
                     </StackPanel>
                     <TextBox x:Name="txt_tracker" HorizontalAlignment="Stretch" Height="22" Margin="10,140,10,0" TextWrapping="Wrap" Text="" IsEnabled="true" VerticalAlignment="Top" Width="AUTO"/>
                     <Label x:Name="lbl_tracker_create" Content="Tracker : " HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="1118"/>
-                    <Label x:Name="lbl_site_create" Content="Site : " HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" Width="1118"/>
-                    <TextBox x:Name="txt_site" HorizontalAlignment="Stretch" Height="22" Margin="10,215,10,0" TextWrapping="Wrap" Text="" IsEnabled="true" VerticalAlignment="Top" Width="AUTO"/>
+                    <Label x:Name="lbl_site_create" Content="Site : " HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="1118"/>
+                    <TextBox x:Name="txt_site" HorizontalAlignment="Stretch" Height="22" Margin="10,200,10,0" TextWrapping="Wrap" Text="" IsEnabled="true" VerticalAlignment="Top" Width="AUTO"/>
+                    <Button Name="btn_Validate" Height="37" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="485,455,520,0" Content="Validate" Click="btn_OpenFile_Click"/>
                 </Grid>
             </TabItem>
 
         </TabControl>
-        <StackPanel Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="17,35,17,331">
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Left"  Margin="17,35,17,331">
             <Grid Margin="0,2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
