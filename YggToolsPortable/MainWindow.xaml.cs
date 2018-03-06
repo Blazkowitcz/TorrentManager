@@ -38,6 +38,7 @@ namespace YggToolsPortable
         TorrentManager manager;
         ManageInformations manageInformations;
         CreateTorrent createTorrent;
+        String torrentSelected;
 
         public MainWindow()
         {
@@ -97,8 +98,6 @@ namespace YggToolsPortable
                 });
             }
             DgOrderCount.Items.Refresh();
-            //lbTodoList.ItemsSource = items;
-            //lbTodoList.Items.Refresh();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -115,6 +114,7 @@ namespace YggToolsPortable
                 DataGridCell RowAndColumn = (DataGridCell)dataGrid.Columns[0].GetCellContent(Row).Parent;
                 Console.WriteLine(managers.Count);
                 string CellValue = ((TextBlock)RowAndColumn.Content).Text;
+                torrentSelected = CellValue;
                 foreach (TorrentManager torrent in engineManager.managers)
                 {
                     Console.WriteLine(torrent.Torrent.Name);
@@ -129,9 +129,7 @@ namespace YggToolsPortable
                         lbl_passkey.Content = "Passkey : " + torrent.Torrent.PublisherUrl;
                     }
                 }
-
             }
-
         }
 
         private void btn_OpenFile_Click(object sender, RoutedEventArgs e)
@@ -142,6 +140,21 @@ namespace YggToolsPortable
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             createTorrent.OpenFolder();
+        }
+
+        private void btn_Validate_Click(object sender, RoutedEventArgs e)
+        {
+            createTorrent.ValidateTorrent();
+        }
+
+        private void btn_Start_Click(object sender, RoutedEventArgs e)
+        {
+            engineManager.StartTorrent(torrentSelected);
+        }
+
+        private void btn_Pause_Click(object sender, RoutedEventArgs e)
+        {
+            engineManager.StopTorrent(torrentSelected);
         }
     }
 

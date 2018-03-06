@@ -28,11 +28,12 @@ namespace YggToolsPortable.Classes
         void SetupEngine()
         {
             EngineSettings settings = new EngineSettings();
+            settings.GlobalMaxDownloadSpeed = 999999999;
+            settings.GlobalMaxUploadSpeed = 999999999;
             settings.AllowedEncryption = ChooseEncryption();
             settings.PreferEncryption = true;
             settings.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Torrents");
             Console.WriteLine(settings.SavePath);
-            settings.GlobalMaxUploadSpeed = 200 * 1024;
             engine = new ClientEngine(settings);
             engine.ChangeListenEndpoint(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6969));
         }
@@ -53,8 +54,7 @@ namespace YggToolsPortable.Classes
         {
             DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\");
             foreach (var file in directory.GetFiles("*.torrent"))
-            {
-                //Console.WriteLine(file.FullName);
+            { 
                 LaunchTorrent(file.FullName);
             }
             mainWindow.UpdateList();
@@ -100,9 +100,26 @@ namespace YggToolsPortable.Classes
             return manager;
         }
 
-        public void UpdateInformations(TorrentManager torrent)
+        public void StartTorrent(String torrentName)
         {
+            foreach (TorrentManager torrent in managers)
+            {
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    torrent.Start();
+                }
+            }
+        }
 
+        public void StopTorrent(String torrentName)
+        {
+            foreach (TorrentManager torrent in managers)
+            {
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    torrent.Pause();
+                }
+            }
         }
 
 

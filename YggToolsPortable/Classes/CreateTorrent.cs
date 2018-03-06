@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MonoTorrent.Common;
+using System.Windows.Documents;
 
 namespace YggToolsPortable.Classes
 {
@@ -29,7 +31,7 @@ namespace YggToolsPortable.Classes
             if (userClickedOK == true)
             {
                 contentUrl = openFileDialog1.FileName;
-                mainWindow.lbl_fileName.Text = contentUrl;
+                mainWindow.txt_fileName.Text = contentUrl;
             }
         }
 
@@ -42,13 +44,31 @@ namespace YggToolsPortable.Classes
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     contentUrl = fbd.SelectedPath;
-                    mainWindow.lbl_fileName.Text = contentUrl;
+                    mainWindow.txt_fileName.Text = contentUrl;
                 }
             }
         }
 
         public void ValidateTorrent()
         {
+            if (mainWindow.txt_fileName.Text != "" && mainWindow.txt_tracker.Text != "" && mainWindow.txt_site.Text != "")
+            {
+                TorrentCreator torrent = new TorrentCreator();
+                ITorrentFileSource fileSource = new TorrentFileSource(contentUrl);
+                torrent.Private = true;
+                List<String> urls = new List<string>();
+                urls.Add(mainWindow.txt_tracker.Text);
+                if (urls.Count != 0)
+                {
+                    torrent.Announces.Add(urls);
+                }
+                torrent.PublisherUrl = mainWindow.txt_site.Text;
+                torrent.Create(fileSource, AppDomain.CurrentDomain.BaseDirectory + "toto.torrent");
+            }
+            else
+            {
+
+            }
         }
     }
 }
