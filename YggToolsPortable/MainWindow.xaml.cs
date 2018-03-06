@@ -22,13 +22,14 @@ using YggToolsPortable.Classes;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using MahApps.Metro.Controls;
 
 namespace YggToolsPortable
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         List<TorrentManager> managers = new List<TorrentManager>();
         List<TorrentInformation> items = new List<TorrentInformation>();
@@ -88,7 +89,12 @@ namespace YggToolsPortable
             items.Clear();
             foreach (TorrentManager torrent in engineManager.managers)
             {
-                items.Add(new TorrentInformation() { Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)) , DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s", UpSpeed = torrent.Monitor.UploadSpeed + "kb/s" });
+                items.Add(new TorrentInformation()
+                {
+                    Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)) ,
+                    DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s",
+                    UpSpeed = torrent.Monitor.UploadSpeed + "kb/s"
+                });
             }
             DgOrderCount.Items.Refresh();
             //lbTodoList.ItemsSource = items;

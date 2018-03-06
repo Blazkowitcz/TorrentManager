@@ -1,20 +1,21 @@
-﻿<Window x:Class="YggToolsPortable.MainWindow"
+﻿<Controls:MetroWindow x:Class="YggToolsPortable.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YggToolsPortable"
         mc:Ignorable="d"
-        Title="YggToolsPortable" Height="621.247" Width="1172">
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="YggToolsPortable" Height="639.247" Width="1172">
     <Grid>
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
-            <TabItem Header="Torrent Downloader">
+            <TabItem Header="[Torrent Downloader]">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,-1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" Margin="0,0,0,252" GridLinesVisibility="Vertical" CanUserSortColumns="False" Grid.ColumnSpan="2" SelectionChanged="DgOrderCount_SelectionChanged">
+                    <DataGrid x:Name="DgOrderCount" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}" Margin="0,0,0,263" GridLinesVisibility="Vertical" CanUserSortColumns="False" Grid.ColumnSpan="2" SelectionChanged="DgOrderCount_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"  Binding="{Binding Title}" Width="AUTO"/>
                             <DataGridTemplateColumn Header="Progress" Width="380">
@@ -32,8 +33,8 @@
                             <DataGridTextColumn Header="Up Speed"  Binding="{Binding UpSpeed}" Width="AUTO"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
-                    <GroupBox Header="Torrent Information" Height="212" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="AUTO" Margin="0,0,0,35">
+                    <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,9" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
+                    <GroupBox Header="Torrent Information" Height="209" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,0,0,39">
                         <StackPanel>
                             <Label Name="lbl_name" Content="Name :"></Label>
                             <Label Name="lbl_size" Content="Size :" ></Label>
@@ -44,13 +45,20 @@
                             <Label Name="lbl_tracker" Content="Tracker :"></Label>
                         </StackPanel>
                     </GroupBox>
+                    <GroupBox Header="Actions" Height="209" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Margin="10,0,426,39" Grid.Column="1">
+                        <StackPanel Orientation="Vertical">
+                            <Button Content="Start / Resume" Margin="0,10,0,10"></Button>
+                            <Button Content="Pause" Margin="0,0,0,10"></Button>
+                            <Button Content="Delete" Margin="0,0,0,10"></Button>
+                        </StackPanel>
+                    </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Torrent Browser">
+            <TabItem Header="[Torrent Browser]">
                 <Grid Background="#FFE5E5E5">
                 </Grid>
             </TabItem>
-            <TabItem Header="User Information">
+            <TabItem Header="[User Information]">
                 <Grid Background="#FFE5E5E5">
                     <Label x:Name="label" Content="Nickname : " HorizontalAlignment="Left" Margin="151,50,0,0" VerticalAlignment="Top" Width="76"/>
                     <TextBox x:Name="txt_nick" HorizontalAlignment="Left" Height="23" Margin="232,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
@@ -65,7 +73,7 @@
                     <Label x:Name="label_Copy3" Content="Save Path : " HorizontalAlignment="Left" Margin="156,219,0,0" VerticalAlignment="Top" Width="71"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Create Torrent">
+            <TabItem Header="[Create Torrent]">
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="lbl_fileName" HorizontalAlignment="Stretch" Height="21" Margin="10,28,10,0" TextWrapping="Wrap" Text="" IsEnabled="False" VerticalAlignment="Top" Width="AUTO"/>
                     <Label x:Name="label1" Content="File : " HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="1118"/>
@@ -93,4 +101,4 @@
         </StackPanel>
 
     </Grid>
-</Window>
+</Controls:MetroWindow>

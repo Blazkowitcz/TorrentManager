@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
 
 namespace YggToolsPortable.Classes
 {
@@ -20,7 +22,7 @@ namespace YggToolsPortable.Classes
 
         public void OpenFile()
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.Multiselect = false;
             bool? userClickedOK = openFileDialog1.ShowDialog();
@@ -33,7 +35,20 @@ namespace YggToolsPortable.Classes
 
         public void OpenFolder()
         {
-            
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    contentUrl = fbd.SelectedPath;
+                    mainWindow.lbl_fileName.Text = contentUrl;
+                }
+            }
+        }
+
+        public void ValidateTorrent()
+        {
         }
     }
 }
