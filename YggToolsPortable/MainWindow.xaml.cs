@@ -159,7 +159,21 @@ namespace YggToolsPortable
         {
             engineManager.StopTorrent(torrentSelected);
         }
+
+        private void btn_Move_Click(object sender, RoutedEventArgs e)
+        {
+            MyPopup.IsOpen = true;
+        }
+
+        private void btn_PopupCancel_Click(object sender, RoutedEventArgs e)
+        {
+            engineManager.Test(torrentSelected);
+            MyPopup.IsOpen = false;
+        }
+
+        private void btn_PopupValidate_Click(object sender, RoutedEventArgs e)
+        {
+            engineManager.MoveTorrent(torrentSelected, txt_Move.Text);
+        }
     }
-
-
 }

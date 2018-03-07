@@ -51,7 +51,7 @@
                             <Button Name="btn_Start" Content="Start / Resume" Margin="0,10,0,10" Click="btn_Start_Click"/>
                             <Button Name="btn_Pause" Content="Pause" Margin="0,0,0,10" Click="btn_Pause_Click"></Button>
                             <Button Content="Delete" Margin="0,0,0,10"></Button>
-                            <Button Content="Move" Margin="0,0,0,10"></Button>
+                            <Button Name="btn_Move" Content="Move" Margin="0,0,0,10" Click="btn_Move_Click"></Button>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
@@ -92,7 +92,7 @@
             </TabItem>
             <TabItem Header="[⚙]">
                 <Grid Background="#FFE5E5E5">
-                    
+
                 </Grid>
             </TabItem>
 
@@ -106,6 +106,25 @@
 
             </Grid>
         </StackPanel>
-
+        <Popup Name="MyPopup"
+               Placement="Center"
+               HorizontalOffset="-100"
+               VerticalOffset="-100"
+               AllowsTransparency="True"
+               >
+            <Border Margin="0 0 8 8" BorderThickness="1,1,1,1" BorderBrush="DarkSlateGray">
+                <Border.Effect>
+                    <DropShadowEffect/>
+                </Border.Effect>
+                <Grid Height="269" Width="461" Background="White">
+                    <Label Content="Move Torrent" Margin="0,0,0,245" HorizontalAlignment="Center"></Label>
+                    <Label Content="Path:" Margin="10,96,10,121"></Label>
+                    <TextBox Name="txt_Move" Height="20" Margin="10,122,10,121"/>
+                    <Button Name="btn_PopupValidate" Content="Validate" Margin="262,194,110,42" Click="btn_PopupValidate_Click"></Button>
+                    <Button Name="btn_PopupCancel" Content="Cancel" Margin="110,194,262,42" Click="btn_PopupCancel_Click"></Button>
+                </Grid>
+            </Border>
+            
+        </Popup>
     </Grid>
 </Controls:MetroWindow>

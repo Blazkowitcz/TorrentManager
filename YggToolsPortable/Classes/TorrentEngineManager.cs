@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace YggToolsPortable.Classes
 {
@@ -118,6 +119,49 @@ namespace YggToolsPortable.Classes
                 if (torrent.Torrent.Name == torrentName)
                 {
                     torrent.Pause();
+                }
+            }
+        }
+
+        public void MoveTorrent(String torrentName, String path)
+        {
+            foreach (TorrentManager torrent in managers)
+            {
+                
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    try
+                    {
+                        torrent.MoveFiles(path, true);
+                        ChangeTorrent(torrent, path);
+                    }
+                    catch
+                    {
+                        torrent.Stop();
+                        MessageBox.Show("Torrent Stopping, move only when the state of the torrent is stopped");
+                    }
+
+                }
+            }
+        }
+
+        private void ChangeTorrent(TorrentManager torrent, String path)
+        {
+            Torrent torrents = Torrent.Load(path);
+            foreach (TorrentFile file in torrents.Files)
+            {
+                file.Priority = Priority.Normal;
+            }
+            torrent = new TorrentManager(torrents, path, new TorrentSettings());
+        }
+
+        public void Test(String torrentName)
+        {
+            foreach (TorrentManager torrent in managers)
+            {
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    torrent.Stop();
                 }
             }
         }
