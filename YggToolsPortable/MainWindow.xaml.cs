@@ -90,11 +90,14 @@ namespace YggToolsPortable
             items.Clear();
             foreach (TorrentManager torrent in engineManager.managers)
             {
+                Console.WriteLine("ISRUNNING : " + torrent.State);
+                string state = torrent.State.ToString();
                 items.Add(new TorrentInformation()
                 {
-                    Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)) ,
+                    Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)),
                     DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s",
-                    UpSpeed = torrent.Monitor.UploadSpeed + "kb/s"
+                    UpSpeed = torrent.Monitor.UploadSpeed + "kb/s",
+                    Status = state
                 });
             }
             DgOrderCount.Items.Refresh();
@@ -126,7 +129,7 @@ namespace YggToolsPortable
                         lbl_download.Content = "Download : " + torrent.Monitor.DownloadSpeed;
                         lbl_upload.Content = "Upload : " + torrent.Monitor.UploadSpeed;
                         lbl_peers.Content = "Seeder : " + torrent.Peers.Seeds;
-                        lbl_passkey.Content = "Passkey : " + torrent.Torrent.PublisherUrl;
+                        lbl_status.Content = "Status : " + torrent.State.ToString();
                     }
                 }
             }

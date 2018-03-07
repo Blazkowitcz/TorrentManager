@@ -13,5 +13,6 @@ namespace YggToolsPortable.Classes
         public int Completion { get; set; }
         public String DownSpeed { get; set; }
         public String UpSpeed { get; set; }
+        public String Status { get; set; }
     }
 }
