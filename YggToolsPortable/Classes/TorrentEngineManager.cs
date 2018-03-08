@@ -79,7 +79,7 @@ namespace YggToolsPortable.Classes
             engine.StartAll();
         }
 
-        public void AddTorrent(String path)
+        public void AddTorrent(string path)
         {
             LaunchTorrent(path);
             string fileName = Path.GetFileName(path);
@@ -101,7 +101,7 @@ namespace YggToolsPortable.Classes
             return manager;
         }
 
-        public void StartTorrent(String torrentName)
+        public void StartTorrent(string torrentName)
         {
             foreach (TorrentManager torrent in managers)
             {
@@ -112,7 +112,7 @@ namespace YggToolsPortable.Classes
             }
         }
 
-        public void StopTorrent(String torrentName)
+        public void StopTorrent(string torrentName)
         {
             foreach (TorrentManager torrent in managers)
             {
@@ -123,7 +123,7 @@ namespace YggToolsPortable.Classes
             }
         }
 
-        public void MoveTorrent(String torrentName, String path)
+        public void MoveTorrent(string torrentName, string path)
         {
             foreach (TorrentManager torrent in managers)
             {
@@ -145,7 +145,7 @@ namespace YggToolsPortable.Classes
             }
         }
 
-        private void ChangeTorrent(TorrentManager torrent, String path)
+        private void ChangeTorrent(TorrentManager torrent, string path)
         {
             Torrent torrents = Torrent.Load(path);
             foreach (TorrentFile file in torrents.Files)
@@ -155,7 +155,7 @@ namespace YggToolsPortable.Classes
             torrent = new TorrentManager(torrents, path, new TorrentSettings());
         }
 
-        public void Test(String torrentName)
+        public void Test(string torrentName)
         {
             foreach (TorrentManager torrent in managers)
             {
@@ -164,6 +164,24 @@ namespace YggToolsPortable.Classes
                     torrent.Stop();
                 }
             }
+        }
+
+        public void DeleteTorrent(string torrentName)
+        {
+            foreach (TorrentManager torrent in managers)
+            {
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    File.Delete(torrent.Torrent.TorrentPath);
+                    managers.Remove(torrent);
+                    break;
+                }
+            }
+        }
+
+        public void DeleteData()
+        {
+
         }
 
 

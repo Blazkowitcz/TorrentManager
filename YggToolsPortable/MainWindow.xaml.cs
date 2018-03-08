@@ -38,7 +38,7 @@ namespace YggToolsPortable
         TorrentManager manager;
         ManageInformations manageInformations;
         CreateTorrent createTorrent;
-        String torrentSelected;
+        string torrentSelected;
 
         public MainWindow()
         {
@@ -129,7 +129,7 @@ namespace YggToolsPortable
                         lbl_download.Content = "Download : " + torrent.Monitor.DownloadSpeed;
                         lbl_upload.Content = "Upload : " + torrent.Monitor.UploadSpeed;
                         lbl_peers.Content = "Seeder : " + torrent.Peers.Seeds;
-                        lbl_status.Content = "Status : " + torrent.State.ToString();
+                        lbl_status.Content = "Status : " + torrent.SavePath;
                     }
                 }
             }
@@ -174,6 +174,27 @@ namespace YggToolsPortable
         private void btn_PopupValidate_Click(object sender, RoutedEventArgs e)
         {
             engineManager.MoveTorrent(torrentSelected, txt_Move.Text);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            popupDelete.IsOpen = true;
+        }
+
+        private void btn_DeleteTorrent_Click(object sender, RoutedEventArgs e)
+        {
+            popupDelete.IsOpen = false;
+            engineManager.DeleteTorrent(torrentSelected);
+        }
+
+        private void btn_DeleteData_Click(object sender, RoutedEventArgs e)
+        {
+            popupDelete.IsOpen = false;
+        }
+
+        private void btn_DeleteCancel_Click(object sender, RoutedEventArgs e)
+        {
+            popupDelete.IsOpen = false;
         }
     }
 }

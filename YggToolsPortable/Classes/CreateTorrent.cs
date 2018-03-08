@@ -56,7 +56,7 @@ namespace YggToolsPortable.Classes
                 TorrentCreator torrent = new TorrentCreator();
                 ITorrentFileSource fileSource = new TorrentFileSource(contentUrl);
                 torrent.Private = true;
-                List<String> urls = new List<string>();
+                List<string> urls = new List<string>();
                 urls.Add(mainWindow.txt_tracker.Text);
                 if (urls.Count != 0)
                 {

@@ -50,7 +50,7 @@
                         <StackPanel Orientation="Vertical">
                             <Button Name="btn_Start" Content="Start / Resume" Margin="0,10,0,10" Click="btn_Start_Click"/>
                             <Button Name="btn_Pause" Content="Pause" Margin="0,0,0,10" Click="btn_Pause_Click"></Button>
-                            <Button Content="Delete" Margin="0,0,0,10"></Button>
+                            <Button Content="Delete" Margin="0,0,0,10" Click="Button_Click_1"></Button>
                             <Button Name="btn_Move" Content="Move" Margin="0,0,0,10" Click="btn_Move_Click"></Button>
                         </StackPanel>
                     </GroupBox>
@@ -124,7 +124,27 @@
                     <Button Name="btn_PopupCancel" Content="Cancel" Margin="110,194,262,42" Click="btn_PopupCancel_Click"></Button>
                 </Grid>
             </Border>
-            
+
+        </Popup>
+
+        <Popup Name="popupDelete"
+               Placement="Center"
+               HorizontalOffset="-100"
+               VerticalOffset="-100"
+               AllowsTransparency="True"
+               >
+            <Border Margin="0 0 8 8" BorderThickness="1,1,1,1" BorderBrush="DarkSlateGray">
+                <Border.Effect>
+                    <DropShadowEffect/>
+                </Border.Effect>
+                <Grid Height="269" Width="461" Background="White">
+                    <Label Content="Delete Torrent" Margin="0,0,0,245" HorizontalAlignment="Center"></Label>
+                    <Button Name="btn_DeleteTorrent" Content="Delete torrent without data" Margin="104,82,96,162" Click="btn_DeleteTorrent_Click"></Button>
+                    <Button Name="btn_DeleteData" Content="Delete torrent with data" Margin="104,123,96,121" Click="btn_DeleteData_Click"></Button>
+                    <Button Name="btn_DeleteCancel" Content="Cancel" Margin="104,163,96,81" Click="btn_DeleteCancel_Click"></Button>
+                </Grid>
+            </Border>
+
         </Popup>
     </Grid>
 </Controls:MetroWindow>

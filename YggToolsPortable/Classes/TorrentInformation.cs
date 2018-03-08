@@ -11,8 +11,8 @@ namespace YggToolsPortable.Classes
     {
         public string Title { get; set; }
         public int Completion { get; set; }
-        public String DownSpeed { get; set; }
-        public String UpSpeed { get; set; }
-        public String Status { get; set; }
+        public string DownSpeed { get; set; }
+        public string UpSpeed { get; set; }
+        public string Status { get; set; }
     }
 }
