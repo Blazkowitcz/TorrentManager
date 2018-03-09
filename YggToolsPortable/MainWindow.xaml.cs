@@ -190,6 +190,7 @@ namespace YggToolsPortable
         private void btn_DeleteData_Click(object sender, RoutedEventArgs e)
         {
             popupDelete.IsOpen = false;
+            engineManager.DeleteData(torrentSelected);
         }
 
         private void btn_DeleteCancel_Click(object sender, RoutedEventArgs e)

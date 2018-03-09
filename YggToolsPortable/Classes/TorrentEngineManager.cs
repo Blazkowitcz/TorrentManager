@@ -179,9 +179,53 @@ namespace YggToolsPortable.Classes
             }
         }
 
-        public void DeleteData()
+        public void DeleteData(string torrentName)
         {
+            foreach (TorrentManager torrent in managers)
+            {
+                if (torrent.Torrent.Name == torrentName)
+                {
+                    torrent.Stop();
+                    string torrentFilePath = torrent.Torrent.TorrentPath;
+                    string torrentDataPath = AppDomain.CurrentDomain.BaseDirectory + "\\DownloadFolder\\" + torrent.Torrent.Name;
+                    managers.Remove(torrent);
+                    File.Delete(torrentFilePath);
+                    Task.Run(() => DeleteFile(torrentDataPath));
+                    managers.Remove(torrent);
+                    break;
+                }
+            }
+        }
 
+        private void DeleteFile(string path)
+        {
+            bool fileDeleted = false;
+            if (File.Exists(path))
+            {
+                while (!fileDeleted)
+                {
+                    try
+                    {
+                        File.Delete(path);
+                        fileDeleted = true;
+                    }
+                    catch{}
+                }
+            }
+            else if (Directory.Exists(path))
+            {
+                while (!fileDeleted)
+                {
+
+                    try
+                    {
+                        Directory.Delete(path, true);
+                        fileDeleted = true;
+                    }
+                    catch{}
+                }
+                
+            }
         }
 
 
