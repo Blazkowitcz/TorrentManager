@@ -1,5 +1,6 @@
-# YggToolPortable
-Torrent Client dedicated to Yggtorrent
+# Torrent Manage
+Torrent Client
+
 TODO : 
 
 - Ajout d'un système pour sauvegarder le déplacement des torrents
