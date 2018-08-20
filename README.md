@@ -1,4 +1,4 @@
-# Torrent Manage
+# Torrent Manager
 Torrent Client with a search motor dedicated to torrent website and account managemnt
 
 TODO : 
