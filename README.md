@@ -1,5 +1,5 @@
 # Torrent Manage
-Torrent Client
+Torrent Client with a search motor dedicated to torrent website and account managemnt
 
 TODO : 
 
