@@ -1,6 +1,7 @@
 ﻿using MonoTorrent.Client;
 using MonoTorrent.Client.Encryption;
 using MonoTorrent.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +23,7 @@ namespace YggToolsPortable.Classes
         public TorrentEngineManager(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
+            SetupConfig();
             SetupEngine();
             StartTorrents();
         }
@@ -37,6 +39,16 @@ namespace YggToolsPortable.Classes
             Console.WriteLine(settings.SavePath);
             engine = new ClientEngine(settings);
             engine.ChangeListenEndpoint(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6969));
+            
+        }
+
+        void SetupConfig()
+        {
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager"))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager");
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json", "");
+            }
         }
 
         EncryptionTypes ChooseEncryption()
@@ -51,12 +63,26 @@ namespace YggToolsPortable.Classes
             return encryption;
         }
 
+        public void SaveTorrent()
+        {
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json", String.Empty);
+            List<TorrentScheme> listTorrentScheme = new List<TorrentScheme>();
+            foreach (TorrentManager torrent in managers)
+            {
+                TorrentScheme tor = new TorrentScheme { Name = torrent.Torrent.Name, Path = torrent.SavePath };
+                listTorrentScheme.Add(tor);
+            }
+            string torrentsSerialized = JsonConvert.SerializeObject(listTorrentScheme);
+            File.AppendAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json", torrentsSerialized);
+        }
+
         public void AutoStartTorrent()
         {
+            var results = JsonConvert.DeserializeObject<List<TorrentScheme>>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json"));
             DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\");
-            foreach (var file in directory.GetFiles("*.torrent"))
+            foreach (TorrentScheme file in results)
             { 
-                LaunchTorrent(file.FullName);
+                LaunchTorrent(directory + "\\" + file.Name + ".torrent");
             }
             mainWindow.UpdateList();
             mainWindow.StartTimer();
@@ -83,6 +109,7 @@ namespace YggToolsPortable.Classes
         {
             LaunchTorrent(path);
             string fileName = Path.GetFileName(path);
+            SaveTorrent();
             File.Copy(path, AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\" + fileName, true);
         }
 

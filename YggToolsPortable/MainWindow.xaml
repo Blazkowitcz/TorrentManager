@@ -92,6 +92,30 @@
             </TabItem>
             <TabItem Header="[⚙]">
                 <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="User Informations" HorizontalAlignment="Left" Height="AUTO" Margin="10,10,0,261" VerticalAlignment="Stretch" Width="335">
+                        <StackPanel>
+                            <Label Content="Nickname : " Margin="10,0,0,0"></Label>
+                            <TextBox Margin="10,0,10,0"></TextBox>
+                            <Label Content="Ratio :" Margin="10,10,10,0"></Label>
+                            <Label Content="Download :" Margin="10,10,10,0"></Label>
+                            <Label Content="Upload :" Margin="10,10,10,0"></Label>
+                            <Button Content="Update" Margin="100,10,100,0"></Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Settings" HorizontalAlignment="Stretch" Height="247" Margin="355,10,10,0" VerticalAlignment="Top">
+                        <StackPanel>
+                            <Label Content="Location :" Margin="10,0,0,0"></Label>
+                            <TextBox Margin="10,0,10,0"></TextBox>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Label Content="Down Speed Limit : " Margin="10,0,0,0"></Label>
+                                <TextBox Width="60"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Label Content="Up Speed Limit :" Margin="10,0,0,0"></Label>
+                                <TextBox Width="60" Margin="20,0,0,0"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
 
                 </Grid>
             </TabItem>
