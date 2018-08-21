@@ -69,7 +69,9 @@ namespace YggToolsPortable.Classes
             List<TorrentScheme> listTorrentScheme = new List<TorrentScheme>();
             foreach (TorrentManager torrent in managers)
             {
-                TorrentScheme tor = new TorrentScheme { Name = torrent.Torrent.Name, Path = torrent.SavePath };
+                Console.WriteLine(Path.GetFileName(torrent.Torrent.TorrentPath));
+                Console.WriteLine(torrent.Torrent.TorrentPath);
+                TorrentScheme tor = new TorrentScheme { Name = Path.GetFileName(torrent.Torrent.TorrentPath), Path = torrent.Torrent.TorrentPath };
                 listTorrentScheme.Add(tor);
             }
             string torrentsSerialized = JsonConvert.SerializeObject(listTorrentScheme);
@@ -78,31 +80,59 @@ namespace YggToolsPortable.Classes
 
         public void AutoStartTorrent()
         {
-            var results = JsonConvert.DeserializeObject<List<TorrentScheme>>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json"));
-            DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\TorrentStorage\\");
-            foreach (TorrentScheme file in results)
-            { 
-                LaunchTorrent(directory + "\\" + file.Name + ".torrent");
+            try
+            {
+                var results = JsonConvert.DeserializeObject<List<TorrentScheme>>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TorrentManager\\Torrents.json"));
+                DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "TorrentStorage");
+                foreach (TorrentScheme file in results)
+                {
+                    //Console.WriteLine(directory + "\\" + file.Name + ".torrent");
+                    LaunchTorrent(directory + "\\" + file.Name, "C:\\Users\\Jacky-Marley\\Desktop\\jackymarley\\");
+                }
+                mainWindow.UpdateList();
+                mainWindow.StartTimer();
             }
-            mainWindow.UpdateList();
-            mainWindow.StartTimer();
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
         }
 
         void LaunchTorrent(string path)
         {
-            Torrent torrent = Torrent.Load(path);
+                Torrent torrent = Torrent.Load(path);
+                foreach (TorrentFile file in torrent.Files)
+                {
+                    file.Priority = Priority.Normal;
+                }
+                torrent.Files[0].Priority = Priority.Highest;
+                manager = new TorrentManager(torrent, "DownloadFolder", new TorrentSettings());
+                managers.Add(manager);
+                engine.Register(manager);
+                PiecePicker picker = new StandardPicker();
+                picker = new PriorityPicker(picker);
+                manager.ChangePicker(picker);
+                engine.StartAll();
+            
+        }
+
+        void LaunchTorrent(string torrentPath, string fileLocation)
+        {
+            Torrent torrent = Torrent.Load(torrentPath);
             foreach (TorrentFile file in torrent.Files)
             {
                 file.Priority = Priority.Normal;
             }
             torrent.Files[0].Priority = Priority.Highest;
-            manager = new TorrentManager(torrent, "DownloadFolder", new TorrentSettings());
+            manager = new TorrentManager(torrent, fileLocation, new TorrentSettings());
             managers.Add(manager);
             engine.Register(manager);
             PiecePicker picker = new StandardPicker();
             picker = new PriorityPicker(picker);
             manager.ChangePicker(picker);
             engine.StartAll();
+
         }
 
         public void AddTorrent(string path)
