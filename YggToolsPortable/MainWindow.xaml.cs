@@ -92,6 +92,8 @@ namespace YggToolsPortable
             {
                 Console.WriteLine("ISRUNNING : " + torrent.State);
                 string state = torrent.State.ToString();
+                string txtDownload = torrent.Monitor.DownloadSpeed > 1000 ? torrent.Monitor.DownloadSpeed + " Mb/s" : torrent.Monitor.DownloadSpeed + " kb/s";
+                string txtUpload = torrent.Monitor.UploadSpeed > 1000 ? torrent.Monitor.UploadSpeed + " Mb/s" : torrent.Monitor.DownloadSpeed + " kb/s";
                 items.Add(new TorrentInformation()
                 {
                     Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)),
@@ -112,6 +114,7 @@ namespace YggToolsPortable
         {
             if (DgOrderCount.SelectedItem != null)
             {
+                this.WindowState = WindowState.Minimized;
                 DataGrid dataGrid = DgOrderCount;
                 DataGridRow Row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
                 DataGridCell RowAndColumn = (DataGridCell)dataGrid.Columns[0].GetCellContent(Row).Parent;
@@ -120,10 +123,19 @@ namespace YggToolsPortable
                 torrentSelected = CellValue;
                 foreach (TorrentManager torrent in engineManager.managers)
                 {
-                    Console.WriteLine(torrent.Torrent.Name);
                     if(torrent.Torrent.Name == CellValue)
                     {
-                        Console.WriteLine("toto");
+                        List<string> listName = new List<string>();
+                        foreach (TorrentFile file in torrent.Torrent.Files)
+                        {
+                            listName.Add(file.Path);
+                        }
+                        torrent.SaveFastResume();
+                        ObservableCollection<string> oList;
+                        oList = new ObservableCollection<string>(listName);
+                        listBoxFiles.DataContext = oList;
+                        Binding binding = new Binding();
+                        listBoxFiles.SetBinding(ItemsControl.ItemsSourceProperty, binding);
                         lbl_name.Content = "Name : " + torrent.Torrent.Name;
                         lbl_size.Content = "Size : " + torrent.Torrent.Size;
                         lbl_download.Content = "Download : " + torrent.Monitor.DownloadSpeed;
@@ -197,5 +209,7 @@ namespace YggToolsPortable
         {
             popupDelete.IsOpen = false;
         }
+
+
     }
 }
