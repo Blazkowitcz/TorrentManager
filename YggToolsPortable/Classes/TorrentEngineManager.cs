@@ -36,7 +36,6 @@ namespace YggToolsPortable.Classes
             settings.AllowedEncryption = ChooseEncryption();
             settings.PreferEncryption = true;
             settings.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Torrents");
-            Console.WriteLine(settings.SavePath);
             engine = new ClientEngine(settings);
             engine.ChangeListenEndpoint(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6969));
             

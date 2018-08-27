@@ -56,7 +56,12 @@
                                 <Button Name="btn_Move" Content="Move" Margin="0,0,0,10" Click="btn_Move_Click"></Button>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="Files" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300" Margin="10,0,0,39"/>
+                        <GroupBox Header="Files" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300" Margin="10,0,0,39">
+                            <StackPanel Orientation="Vertical">
+                                <ListBox x:Name="listBoxFiles" Height="180"/>
+
+                            </StackPanel>
+                        </GroupBox>
                         <GroupBox Header="Peers" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="355" Margin="10,0,0,39">
                             <StackPanel Orientation="Vertical">
 
