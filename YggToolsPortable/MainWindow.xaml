@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:YggToolsPortable"
         mc:Ignorable="d"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -55,11 +56,7 @@
                                 <Button Name="btn_Move" Content="Move" Margin="0,0,0,10" Click="btn_Move_Click"></Button>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="Files" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300" Margin="10,0,0,39">
-                            <StackPanel Orientation="Vertical">
-                                
-                            </StackPanel>
-                        </GroupBox>
+                        <GroupBox Header="Files" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300" Margin="10,0,0,39"/>
                         <GroupBox Header="Peers" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="355" Margin="10,0,0,39">
                             <StackPanel Orientation="Vertical">
 
@@ -69,8 +66,11 @@
                 </Grid>
             </TabItem>
             <TabItem Header="[Torrent Browser]">
-                <Grid Background="#FFE5E5E5">
-                </Grid>
+                <WindowsFormsHost Name="wfhSample">
+                    <WindowsFormsHost.Child>
+                        <wf:WebBrowser Name="webBrowser"/>
+                    </WindowsFormsHost.Child>
+                </WindowsFormsHost>
             </TabItem>
             <TabItem Header="[User Information]">
                 <Grid Background="#FFE5E5E5">
@@ -131,6 +131,7 @@
 
                 </Grid>
             </TabItem>
+
 
         </TabControl>
         <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Left"  Margin="17,35,17,331">

@@ -49,6 +49,8 @@ namespace YggToolsPortable
             engineManager.AutoStartTorrent();
             
             DgOrderCount.ItemsSource = items;
+            (wfhSample.Child as System.Windows.Forms.WebBrowser).ScriptErrorsSuppressed = true;
+            (wfhSample.Child as System.Windows.Forms.WebBrowser).Navigate("http://ftorrent.tk/");
             //lbTodoList.ItemsSource = items;
         }
 
