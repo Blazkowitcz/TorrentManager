@@ -94,29 +94,24 @@ namespace YggToolsPortable
             {
                 Console.WriteLine("ISRUNNING : " + torrent.State);
                 string state = torrent.State.ToString();
-                string txtDownload = torrent.Monitor.DownloadSpeed > 1000 ? torrent.Monitor.DownloadSpeed + " Mb/s" : torrent.Monitor.DownloadSpeed + " kb/s";
-                string txtUpload = torrent.Monitor.UploadSpeed > 1000 ? torrent.Monitor.UploadSpeed + " Mb/s" : torrent.Monitor.DownloadSpeed + " kb/s";
+                string txtDownload = torrent.Monitor.DownloadSpeed > 1000000 ? torrent.Monitor.DownloadSpeed / 1000000 + " Mb/s" : torrent.Monitor.DownloadSpeed /1000 + " kb/s";
+                string txtUpload = torrent.Monitor.UploadSpeed > 1000000 ? torrent.Monitor.UploadSpeed / 1000000 + " Mb/s" : torrent.Monitor.DownloadSpeed / 1000 + " kb/s";
                 items.Add(new TorrentInformation()
                 {
                     Title = torrent.Torrent.Name, Completion = Convert.ToInt32(Math.Floor(torrent.Progress)),
-                    DownSpeed = torrent.Monitor.DownloadSpeed + " kb/s",
-                    UpSpeed = torrent.Monitor.UploadSpeed + "kb/s",
+                    DownSpeed = txtDownload,
+                    UpSpeed = txtUpload,
                     Status = state
                 });
             }
             DgOrderCount.Items.Refresh();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void DgOrderCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DgOrderCount.SelectedItem != null)
             {
-                this.WindowState = WindowState.Minimized;
                 DataGrid dataGrid = DgOrderCount;
                 DataGridRow Row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
                 DataGridCell RowAndColumn = (DataGridCell)dataGrid.Columns[0].GetCellContent(Row).Parent;
@@ -132,7 +127,6 @@ namespace YggToolsPortable
                         {
                             listName.Add(file.Path);
                         }
-                        torrent.SaveFastResume();
                         ObservableCollection<string> oList;
                         oList = new ObservableCollection<string>(listName);
                         listBoxFiles.DataContext = oList;

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:YggToolsPortable"
         mc:Ignorable="d"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="YggToolsPortable" Height="639.247" Width="1172">
+        Title="YggToolsPortable" Height="639.247" Width="1170" MinWidth="1170">
     <Grid>
         <TabControl Height="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="AUTO" Margin="10,35,10,10">
             <TabItem Header="[Torrent Downloader]">
@@ -35,9 +35,9 @@
                             <DataGridTextColumn Header="Status"  Binding="{Binding Status}" Width="AUTO"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,9" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="121" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
+                    <Button x:Name="btn_addTorrent" Content="Add Torrent" Margin="10,0,0,10" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="122" RenderTransformOrigin="0.331,12" Click="btn_addTorrent_Click"/>
                     <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-                        <GroupBox Header="Torrent Information" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="335" Margin="10,0,0,39">
+                        <GroupBox Header="Torrent Information" Height="215" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="350" Margin="10,0,0,39">
                             <StackPanel>
                                 <Label Name="lbl_name" Content="Name :"></Label>
                                 <Label Name="lbl_size" Content="Size :" ></Label>
