@@ -1,5 +1,5 @@
 # Torrent Manager
-Torrent Client with a search motor dedicated to torrent website and account managemnt
+Torrent Client with a search engine dedicated to torrent website and account managemnt
 
 TODO : 
 
